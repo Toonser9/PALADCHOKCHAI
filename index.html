@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>บันทึกผลการปฏิบัติงาน</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Kanit', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  background: linear-gradient(135deg, #42a5f5, #1e88e5, #6a1b9a);
+  background-size: 600% 600%;
+  animation: bgGradient 20s ease infinite;
+}
+
+@keyframes bgGradient {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.container {
+  width: 95%;
+  max-width: 1000px;
+  background: #ffffffee; 
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  padding: 40px 50px;
+  border-top: 10px solid #1e88e5;
+  animation: fadeIn 1.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+h2 {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 35px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+
+label {
+  font-size: 20px;
+  color: #1565c0;
+  display: block;
+  margin-top: 18px;
+  font-weight: 600;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px;
+  font-size: 17px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #90caf9;
+  background: #e3f2fd;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 15px rgba(66,165,245,0.6);
+  outline: none;
+  background: #ffffff;
+}
+
+textarea {
+  min-height: 120px;
+  resize: none;
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 22px;
+}
+
+button {
+  margin-top: 30px;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(270deg, #42a5f5, #1e88e5, #6a1b9a);
+  background-size: 600% 600%;
+  animation: GradientBG 6s ease infinite;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.55), 0 0 20px rgba(66,165,245,0.7);
+}
+
+@keyframes GradientBG {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@media (max-width: 700px){
+  .container{
+    padding: 30px 20px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  label{
+    font-size: 18px;
+  }
+  input, select, textarea{
+    font-size: 16px;
+    padding: 12px;
+  }
+  button{
+    font-size: 18px;
+    padding: 14px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>บันทึกผลการปฏิบัติงานของกำนัน/ผู้ใหญ่บ้าน</h2>
+
+  <form id="workForm" method="POST">
+    <label>มิติการปฏิบัติงาน *</label>
+    <select required name="dimension">
+      <option disabled selected>กรุณาเลือกมิติการปฏิบัติงาน</option>
+      <option>งานตามนโยบาย</option>
+      <option>งานตามภารกิจ</option>
+    </select>
+
+    <div class="row">
+      <div>
+        <label>ตำบล *</label>
+        <select required name="subdistrict" id="subdistrict">
+          <option disabled selected>กรุณาเลือกตำบล</option>
+          <option>กระโทก</option>
+          <option>ด่านเกวียน</option>
+          <option>ทุ่งอรุณ</option>
+          <option>ท่าจะหลุง</option>
+          <option>ท่าลาดขาว</option>
+          <option>ท่าอ่าง</option>
+          <option>ท่าเยี่ยม</option>
+          <option>พลับพลา</option>
+          <option>ละลมใหม่พัฒนา</option>
+          <option>โชคชัย</option>
+        </select>
+      </div>
+      <div>
+        <label>หมู่บ้าน *</label>
+        <select required name="village" id="village">
+          <option disabled selected>กรุณาเลือกหมู่บ้าน</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>วันที่ปฏิบัติงาน *</label>
+        <select required name="day" id="day"></select>
+      </div>
+      <div>
+        <label>เดือน *</label>
+        <select required name="month" id="month"></select>
+      </div>
+      <div>
+        <label>ปี พ.ศ. *</label>
+        <select required name="year" id="year"></select>
+      </div>
+    </div>
+
+    <label>อัปโหลดรูปภาพปฏิบัติงาน 1</label>
+    <input type="file" accept="image/png, image/jpeg" required />
+
+    <label>อัปโหลดรูปภาพปฏิบัติงาน 2</label>
+    <input type="file" accept="image/png, image/jpeg" />
+
+    <label>อัปโหลดรูปภาพปฏิบัติงาน 3</label>
+    <input type="file" accept="image/png, image/jpeg" />
+
+    <label>รายละเอียดการปฏิบัติงาน *</label>
+    <textarea required name="details" placeholder="กรอกรายละเอียดการปฏิบัติงานที่นี่"></textarea>
+
+    <button type="submit">ส่งข้อมูล</button>
+  </form>
+</div>
+
+<script>
+// textarea ขยายตามเนื้อหา
+const textarea = document.querySelector('textarea[name="details"]');
+textarea.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = this.scrollHeight + 'px';
+});
+
+// ข้อมูลหมู่บ้าน
+const villages = {
+  'กระโทก': ['01 บ้านศรีพุทธาราม','02 บ้านหนองคล้า','03 บ้านดอนใหญ่','04 บ้านโคกกระสังข์','05 บ้านพะโค','06 บ้านโพธิ์เงิน','07 บ้านโพธิ์ทอง','08 บ้านชะอม','09 บ้านโบสถ์','10 บ้านใหม่','11 บ้านปรางค์พะโค','12 บ้านหมี','13 บ้านคลองท่าแร่','พื้นที่ชุมชน'],
+  'ด่านเกวียน': ['01 บ้านด่านเกวียน','02 บ้านด่านเกวียน','03 บ้านป่าบง','04 บ้านโนนม่วง','05 บ้านตูม','06 บ้านหนองบอน','07 บ้านด่านชัย','08 บ้านใหม่หนองขาม','09 บ้านหนองไผ่พัฒนา','10 บ้านหนองสระธาร','พื้นที่ชุมชน'],
+  'ทุ่งอรุณ': ['01 บ้านปอพราน','02 บ้านโกรกน้าใส','03 บ้านหนองปรึก','04 บ้านวังตะแบก','05 บ้านสะแกกรอง','06 บ้านโค้งกระโดน','07 บ้านดอนเกตุ','08 บ้านทุ่งอรุณ','09 บ้านโนนปอแดง','10 บ้านหนองทองค่า','11 บ้านตะแลง','12 บ้านใหม่ดอนเกตุ','13 บ้านหัวสะพาน','14 บ้านหนองโพธิ์','15 บ้านใหม่หนองปรีก','16 บ้านใหม่หัวสะพาน','17 บ้านใหม่เกตุอรุณทรัพย์','พื้นที่ชุมชน'],
+  'ท่าจะหลุง': ['01 บ้านขี้ตุ่น','02 บ้านขี้ตุ่น','03 บ้านหนองหญ้าปล้อง','04 บ้านขี้ตุ่น','05 บ้านส่าโรง','06 บ้านงิ้ว','07 บ้านใหม่นานิยม','08 บ้านหนองกก','09 บ้านหัวดอน','10 บ้านโนนสวรรค์','พื้นที่ชุมชน'],
+  'ท่าลาดขาว': ['01 บ้านท่าลาดขาว','02 บ้านท่าลาดขาว','03 บ้านท่าลาดขาว','04 บ้านโคกกระสังข์','05 บ้านบึงพระ','06 บ้านบึงพระ','07 บ้านบึงพระ','08 บ้านบึงไทย','09 บ้านบึงไทย','10 บ้านสระพระ','11 บ้านหนองแปลน','พื้นที่ชุมชน'],
+  'ท่าอ่าง': ['01 บ้านไร่','02 บ้านกุดโบสถ์','03 บ้านท่าอ่าง','04 บ้านท่าอ่าง','05 บ้านดอนพราหมณ์','06 บ้านท่าอ่าง','07 บ้านหนองเสาเดียว','08 บ้านหนองโสน','09 บ้านหนองไผ่พัฒนา','10 บ้านหนองเสาเดียวใหม่พัฒนา','พื้นที่ชุมชน'],
+  'ท่าเยี่ยม': ['01 บ้านท่าเยี่ยม','02 บ้านคลองมะเดื่อ','03 บ้านหนองกระทุ่ม','04 บ้านโจด','05 บ้านคลองบง','06 บ้านโนนเพชร','07 บ้านดอนไพล','08 บ้านดอนไพล','09 บ้านโนนสะอาด','10 บ้านนาตลิ่งชัน','11 บ้านกอโจด','12 บ้านนาใหม่','13 บ้านกอโจดไทรย้อย','14 บ้านหัวระนาม','15 บ้านท่าบ่อ','16 บ้านหนองกกพัฒนา','พื้นที่ชุมชน'],
+  'พลับพลา': ['01 บ้านพลับพลา','02 บ้านไทย','03 บ้านพลับพลา','04 บ้านโค้งยาง','05 บ้านหนองยายเหล่','06 บ้านกอก','07 บ้านประดากุด','08 บ้านเกาะ','09 บ้านปรางค์','10 บ้านบุ','11 บ้านปรางค์','12 บ้านกุดสวาย','13 บ้านท่าตะเคียน','14 บ้านคลองยาง','15 บ้านคลองกลาง','16 บ้านโนนแดง','17 บ้านบุ','18 บ้านบุยอ','พื้นที่ชุมชน'],
+  'ละลมใหม่พัฒนา': ['01 บ้านละลม','02 บ้านละลม','03 บ้านละลม','04 บ้านละลม','05 บ้านสระตะหมด','06 บ้านกุดจอกน้อย','07 บ้านกุดจอกใหญ่','08 บ้านคลองกระชาย','09 บ้านคลองยาง','10 บ้านหนองชุมแสง','11 บ้านหนองผักหวาน','12 บ้านโคกพลวง','พื้นที่ชุมชน'],
+  'โชคชัย': ['01 บ้านโชคชัย','02 บ้านสระประทุม','03 บ้านป่าหมาก','04 บ้านพิชิตคเชนทร์','05 บ้านบุ','06 บ้านกระโทก','07 บ้านบึงน้อย','08 บ้านบึง','09 บ้านบึงทับปรางค์','10 บ้านบึงทับปรางค์','11 บ้านหนองสาโรง','12 บ้านโพธิ์ทอง','13 บ้านหนองไผ่','14 บ้านสระประทุมใหม่าพัฒนา','15 บ้านปรางค์ใหม่พัฒนา','พื้นที่ชุมชน']
+};
+
+const subdistrictSelect = document.getElementById('subdistrict');
+const villageSelect = document.getElementById('village');
+subdistrictSelect.addEventListener('change', () => {
+  const selected = subdistrictSelect.value;
+  villageSelect.innerHTML = '<option disabled selected>กรุณาเลือกหมู่บ้าน</option>';
+  if(villages[selected]){
+    villages[selected].forEach(v => {
+      const option = document.createElement('option');
+      option.value = v;
+      option.textContent = v;
+      villageSelect.appendChild(option);
+    });
+  }
+});
+
+// สร้างวัน เดือน ปี
+const daySelect = document.getElementById('day');
+const monthSelect = document.getElementById('month');
+const yearSelect = document.getElementById('year');
+
+for(let i=1; i<=31; i++){
+  const opt = document.createElement('option');
+  opt.value = i.toString().padStart(2,'0');
+  opt.textContent = i.toString().padStart(2,'0');
+  daySelect.appendChild(opt);
+}
+const months = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+months.forEach(m => {
+  const opt = document.createElement('option');
+  opt.value = m;
+  opt.textContent = m;
+  monthSelect.appendChild(opt);
+});
+for(let y=2560; y<=2580; y++){
+  const opt = document.createElement('option');
+  opt.value = y;
+  opt.textContent = y;
+  yearSelect.appendChild(opt);
+}
+
+// ส่งฟอร์มไป Node.js
+document.getElementById('workForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  fetch('http://localhost:3000/submit', {  // เปลี่ยนเป็น URL server จริงเมื่อออนไลน์
+    method: 'POST',
+    body: new FormData(this)
+  })
+  .then(res => res.text())
+  .then(msg => alert(msg))
+  .catch(err => alert('เกิดข้อผิดพลาด'));
+});
+</script>
+
+</body>
+</html>
